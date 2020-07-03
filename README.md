@@ -63,3 +63,7 @@ The main goal of this assignment is to understand the back-propagation algorithm
 # Reference
 1. Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." arXiv preprint arXiv:1312.6114 (2013).
 
+# FAQs
+
+1. RuntimeWarning: invalid value encountered in double_scalars rel_error = abs(grad_analytic - grad_numerical) / abs(grad_numerical + grad_analytic)“ ... might happen. This can happen randomly when the denominator is 0 (or so small) and is not really a problem during gradcheck. 
+2. The gradcheck might take too long. We should reduce the network size (hidden size and latent size) before doing gradcheck. There are 2 * (network size) + 1 forward passes to be ran in the check, so it is better to do on a small scale network.
