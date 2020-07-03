@@ -16,12 +16,14 @@ First, ensure that you are in the same directory with the python files and the "
 
 For the default Auto-Encoder you can run four things:
 
+## Training
 - Training it to see the loss function. You can manually change the hyperparameters (the neural network size, learning rate, etc) to play around with the code a little bit.
 
 ```
 python train_ae train
 ```
 
+## Gradient Checking
 - Checking the gradient correctness. This step is normally important when implementing back-propagation. The idea of grad-check is actually very simple:
 
 + We need to know how to verify the correctness of the back-prop implementation.
@@ -34,13 +36,16 @@ python train_ae train
 python train_ae.py gradcheck
 ```
 
+
+## Evaluation / Reconstruction
 - Using the model for reconstruction. There are around 1900 images in the dataset, so you can enter the image ID from 0 to 1900 to see the image (left) and its reconstruction (right).
 
 ```
 python train_ae.py eval
 ```
 
-- Using the model to sample from a random code. The code will then be randomly generated from a normal distribution N(0, I). This will be then passed to the decoder to generate the image. However, with this model I expect very much to see a darkspawn instead of human faces. The VAE model if successfully implemented, will be able to help us generate human faces from samples of a known distribution. 
+## Sampling 
+- Using the model to sample from a random code. The code will then be randomly generated from a normal distribution N(0, I). This will be then passed to the decoder to generate the image. However, with this model I expect very much to see a **darkspawn** instead of human faces. The VAE model if successfully implemented, will be able to help us generate human faces from samples of a known distribution. 
  
  ```
 python train_ae.py sample
