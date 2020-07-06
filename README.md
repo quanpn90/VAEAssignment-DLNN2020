@@ -17,7 +17,7 @@ First, ensure that you are in the same directory with the python files and the "
 For the default Auto-Encoder you can run four things:
 
 ## Training
-- Training it to see the loss function. You can manually change the hyperparameters (the neural network size, learning rate, etc) to play around with the code a little bit.
+- Training the model on the GreyFace dataset https://cs.nyu.edu/~roweis/data/frey_rawface.jpg with 1965. You can manually change the hyperparameters (the neural network size, learning rate, etc) to play around with the code a little bit.
 
 ```
 python train_ae train
@@ -38,7 +38,7 @@ python train_ae.py gradcheck
 
 
 ## Evaluation / Reconstruction
-- Using the model for reconstruction. There are around 1900 images in the dataset, so you can enter the image ID from 0 to 1900 to see the image (left) and its reconstruction (right).
+- Using the model for reconstruction. There are around 1965 images in the dataset, so you can enter the image ID from 0 to 1900 to see the image (left) and its reconstruction (right).
 
 ```
 python train_ae.py eval
