@@ -67,3 +67,4 @@ The main goal of this assignment is to understand the back-propagation algorithm
 
 1. RuntimeWarning: invalid value encountered in double_scalars rel_error = abs(grad_analytic - grad_numerical) / abs(grad_numerical + grad_analytic)“ ... might happen. This can happen randomly when the denominator is 0 (or so small) and is not really a problem during gradcheck. 
 2. The gradcheck might take too long. We should reduce the network size (hidden size and latent size) before doing gradcheck. There are 2 * (network size) + 1 forward passes to be ran in the check, so it is better to do on a small scale network.
+3. My explanation is bad. I agree with this, if you find the paper and my writing not clear enough, I think this article can also help from another perspective: https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73
