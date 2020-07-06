@@ -121,8 +121,8 @@ def forward(input):
     # (1) linear
     # H = W_i \times input + Bi
 
-    # (2) Relu
-    # H = Relu(H)
+    # (2) ReLU
+    # H = ReLU(H)
 
     # (3) h > mu
     # Estimate the means of the latent distributions
@@ -138,7 +138,7 @@ def forward(input):
     # D = Wd \times z + Bd
 
     # (7) relu
-    D = Relu(D)
+    # D = ReLU(D)
 
     # (8) dec to output
     # output = Wo \times D + Bo

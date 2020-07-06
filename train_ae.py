@@ -19,10 +19,10 @@ print(ff.shape)
 n_samples = ff.shape[0]
 
 input_size = 560
-hidden_size = 128
+hidden_size = 256
 latent_size = 16
 std = 0.02
-learning_rate = 0.02
+learning_rate = 0.01
 loss_function = 'bce'  # mse or bce
 
 
@@ -73,26 +73,26 @@ def drelu(y):
 
 # Initialization was done according to Kingma et al. 2014.
 # input to hidden weight
-# Wi = np.random.randn(hidden_size, input_size).astype(np.float32) * np.sqrt(2.0 / input_size)
+# Wi = np.random.randn(hidden_size, input_size) * std
 Wi = np.random.uniform(-std, std, size=(hidden_size, input_size))
 Bi = np.random.uniform(-std, std, size=(hidden_size, 1))
-# Bi = np.zeros((hidden_size, 1))
+# Bi = np.random.randn(hidden_size, 1) * std
 # encoding weight (hidden to code mean)
-# Wm = np.random.randn(latent_size, hidden_size).astype(np.float32) * np.sqrt(2.0 / hidden_size)
+# Wm = np.random.randn(latent_size, hidden_size) * std
 Wm = np.random.uniform(-std, std, size=(latent_size, hidden_size))
 Bm = np.random.uniform(-std, std, size=(latent_size, 1))
-# Bm = np.zeros((latent_size, 1))
+# Bm = np.random.randn(latent_size, 1) * std
 
 # weight mapping code to hidden
-# Wd = np.random.randn(hidden_size, latent_size).astype(np.float32) * np.sqrt(2.0 / latent_size)
+# Wd = np.random.randn(hidden_size, latent_size) * std
 Wd = np.random.uniform(-std, std, size=(hidden_size, latent_size))
 Bd = np.random.uniform(-std, std, size=(hidden_size, 1))
-# Bd = np.zeros((hidden_size, 1))
+# Bd = np.random.randn(hidden_size, 1) * std
 # decoded hidden to output
-# Wo = np.random.randn(input_size, hidden_size).astype(np.float32) * np.sqrt(2.0 / hidden_size)
+# Wo = np.random.randn(input_size, hidden_size) * std
 Wo = np.random.uniform(-std, std, size=(input_size, hidden_size))
 Bo = np.random.uniform(-std, std, size=(input_size, 1))
-# Bo = np.zeros((input_size, 1))
+# Bo = np.random.randn(input_size, 1) * std
 
 
 def forward(input):
@@ -107,7 +107,7 @@ def forward(input):
     # (1) linear
     h = np.dot(Wi, input) + Bi
 
-    # (2) tanh
+    # (2) ReLU
     h = relu(h)
 
     # # (3) h > z
@@ -119,7 +119,7 @@ def forward(input):
     # (5) z > dec
     dec = np.dot(Wd, z) + Bd
 
-    # (6) relu
+    # (6) ReLU
     dec = relu(dec)
 
     # (7) dec to output
@@ -185,7 +185,7 @@ def backward(input, activations, scale=True):
     else:
         dBo += np.sum(dl_doutput, axis=-1, keepdims=True)
 
-    # backprop from (6) through relu
+    # backprop from (6) through ReLU
     dl_ddec = np.multiply(drelu(dec), dl_ddec)
 
     # backprop from (5) through fully-connected
@@ -196,7 +196,7 @@ def backward(input, activations, scale=True):
     else:
         dBd += np.sum(dl_ddec, axis=-1, keepdims=True)
 
-    # backprop from (4) through relu
+    # backprop from (4) through ReLU
     dl_dz = np.multiply(drelu(z), dl_dz)
 
     # # backprop from (3) through fully connected
@@ -207,7 +207,7 @@ def backward(input, activations, scale=True):
     else:
         dBm += np.sum(dl_dz, axis=-1, keepdims=True)
 
-    # # # backprop from (2) through relu
+    # # # backprop from (2) through ReLU
     dl_dh = np.multiply(drelu(h), dl_dh)
 
     # backprop from (1) through fully connected
@@ -354,7 +354,6 @@ def decode(z):
     return p
 
 
-
 def eval():
     while True:
 
@@ -391,7 +390,6 @@ def eval():
         print("Done")
 
 
-
 def sample():
     while True:
         cmd = input("Press anything to continue:  ")
@@ -407,7 +405,6 @@ def sample():
         fig = plt.figure(figsize=(2, 2))
 
         plt.imshow(img.reshape(28, 20), cmap='gray')
-        # plt.title('reconstructed face %d' % 0)
         plt.show(block=True)
 
 
