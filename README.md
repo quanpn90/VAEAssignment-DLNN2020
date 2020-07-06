@@ -8,7 +8,7 @@ The implementation of the feed-forward Auto-Encoder is shown, together with the 
 
 Python 3.7 and Numpy are the only requirement. If you have any problem running on Windows, please tell me. 
 
-I have tested the code for both Windows and Linux under Anaconda: https://www.anaconda.com/products/individual 
+I have tested the code for both Windows and Linux under Anaconda: https://www.anaconda.com/products/individual. I recommend this because the Intel Math Kernel Librariy (MKL) will be automatically installed via Anaconda.
 
 # Running.
 
@@ -45,7 +45,7 @@ python train_ae.py eval
 ```
 
 ## Sampling 
-- Using the model to sample from a random code. The code will then be randomly generated from a normal distribution N(0, I). This will be then passed to the decoder to generate the image. However, with this model I expect very much to see a **darkspawn** instead of human faces. The VAE model if successfully implemented, will be able to help us generate human faces from samples of a known distribution. 
+- Using the model to sample from a random code. The code will then be randomly generated from a normal distribution N(0, I). This will be then passed to the decoder to generate the image. However, with this model I expect very much to see a **darkspawn** instead of human faces. The VAE model if successfully implemented, will be able to help us generate human faces from samples of a known distribution. I also provided a model with 256 hidden units and 16 latent units trained after 120000 steps and batch size 64. 
  
  ```
 python train_ae.py sample
