@@ -10,6 +10,8 @@ Python 3.7 and Numpy are the only requirement. If you have any problem running o
 
 I have tested the code for both Windows and Linux under Anaconda: https://www.anaconda.com/products/individual. I recommend this because the Intel Math Kernel Librariy (MKL) will be automatically installed via Anaconda.
 
+If you have access to an NVIDIA GPU, it is probably possible to make the model run faster by converting into cupy https://cupy.chainer.org/. 
+
 # Running.
 
 First, ensure that you are in the same directory with the python files and the "data" directory with the "frey_rawface.mat" inside. Also provided are the model weights in model/ (when loading, they will override the hyperparameters in the train file) so you can directly run eval and sampling (below).
